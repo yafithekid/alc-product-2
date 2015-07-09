@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<html>
+<head>
+  <link rel="stylesheet" href="{% static "vendor/bootstrap/bootflat/css/bootflat.css" %}"/>
+</head>
+<body>
+
+
+
+{% block content %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static "vendor/bootstrap/js/jquery-1.10.1.min.js"%}"></script>
+<script src="{% static "vendor/bootstrap/js/bootstrap.min.js"%}"></script>
+{% endblock %}
+</body>
