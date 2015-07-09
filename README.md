@@ -11,3 +11,4 @@ ALC Learning Management System using Django Web Framework.
 
 ## Database configurations
 See alc/mongoconf.py
+

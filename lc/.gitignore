@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *.egg-info
 *.pot
 *.py[co]
@@ -12,6 +11,4 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
-=======
 *.py[co]
->>>>>>> add project structure
