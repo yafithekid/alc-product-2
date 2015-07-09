@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from lc.models import *
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 
@@ -7,4 +6,9 @@ from django.template import RequestContext, loader
 def index(request):
 	template = loader.get_template("problem/index.html")
 	context = RequestContext(request,{})
- 	return HttpResponse(template.render(context))
+	return HttpResponse(template.render(context))
+
+def read(request):
+	template = loader.get_template("problem/read.html")
+	context = RequestContext(request,{})
+	return HttpResponse(template.render(context))	
