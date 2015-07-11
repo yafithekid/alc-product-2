@@ -4,18 +4,27 @@ from django.template import RequestContext, loader
 from django.core.urlresolvers import reverse
 from . import forms
 from user.services import UserService
-# Create your views here.
+from django.contrib.auth import login
+from commons.commands import CommandBus
+from user.auth.commands import RegisterUser, LoginUser
+
 def register(request):
+  register_success = False
+
   if request.method == 'POST':
     form = forms.RegisterForm(request.POST)
     if (form.is_valid()):
-      print(form.cleaned_data['email'])
-      user = UserService.register(form.cleaned_data['email'],form.cleaned_data['name'],form.cleaned_data['password'])
-      return HttpResponseRedirect(reverse('confirm_register',args=[str(user.id)]))
-    else:
-      return render(request,'home/register.html',{'form':form})
+      bus = CommandBus()
+      regUser = RegisterUser(email=form.cleaned_data['email'],password=form.cleaned_data['password'],name=form.cleaned_data['name'])
+      bus.execute(regUser)
+      user = UserService.findByEmail(form.cleaned_data['email'])
+      register_success = True   
   else:
     form = forms.RegisterForm()
+ 
+  if (register_success):
+    return HttpResponseRedirect(reverse('home.confirm_register',args=[str(user.id)]))
+  else:   
     return render(request,'home/register.html',{'form':form})
 
 def confirm_register(request,_id):
@@ -23,4 +32,19 @@ def confirm_register(request,_id):
   return render(request,'home/confirm_register.html',{'user':user})
 
 def login(request):
-  return HttpResponse("login")
+  login_success = False
+  if (request.method == 'POST'):
+    form = forms.LoginForm(request.POST)
+    if (form.is_valid()):
+      bus = CommandBus()
+      bus.execute(LoginUser(email=form.cleaned_data['email'],request=request))
+      login_success = True
+  else:
+    form = forms.LoginForm()    
+  if (not login_success):
+    return render(request,'home/login.html',{'form':form})
+  else:
+    return HttpResponse("login_success")
+
+def home(request):
+  return render(request,'home/home.html',{})

@@ -1,4 +1,9 @@
 {% extends 'master.html' %}
 {% block content %}
-this is tryout.index
+<form action='{% url 'home.login' %}' method='post'>
+  {% csrf_token %}
+  {{form}}
+  <input type='submit' value='Login' />
+</form>
+
 {% endblock %}
