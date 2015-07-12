@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app.lc'
+    'lc',
+    'user',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'lc','templates')],
+        'DIRS': [os.path.join(BASE_DIR,'app','lc','templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,14 +77,14 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'alc',
-    #     'USER' : 'alc',
-    #     'PASSWORD' : 'alc',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': 3306
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'alc',
+        'USER' : 'alc',
+        'PASSWORD' : 'alc',
+        'HOST': '127.0.0.1',
+        'PORT': 3306
+    }
 }
 
 

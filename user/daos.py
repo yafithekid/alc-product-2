@@ -1,8 +1,4 @@
-from main.mongoconf import CONNECTION
-from mongoengine import connect
 from user.models import User
-
-connect(CONNECTION['default']['name'])
 
 class UserDao:
   @staticmethod
