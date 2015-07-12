@@ -32,6 +32,13 @@ body {
   float: left;
 }
 
+.content-title {
+  font-size: 1.5em;
+  padding:5px;
+  border-bottom: 1px solid #CCD1D9;
+  margin-bottom: 20px;
+}
+
 ul.medals {
   list-style: none;
   padding-left: 10px;

@@ -1,4 +1,3 @@
-from mongoengine import *
 import datetime
 
 class Mail:
