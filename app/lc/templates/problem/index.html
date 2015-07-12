@@ -1,4 +1,84 @@
-{% extends 'master.html' %}
+{% extends 'master-sidebar.html' %}
 {% block content %}
-this is problem.index file s
+{{ block.super }}
+<div class="col-sm-6">
+  <div class="row text-center">
+    <h3>
+      Soal OSN 2015
+    </h3>
+  </div>
+  <div class="row text-center">
+    <h4>
+      5 of 10
+    </h4>
+  </div>
+  <ul class="row list-group">
+    <li class="list-group-item">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Soal No . 1
+        </div>
+        <div class="panel-body">
+          <div class="col-sm-4 pull-right">
+            <a href="#" class="thumbnail pull-right">{!! HTML::image('img/geom.jpg') !!}</a>
+          </div>
+          <p>
+            (OSN 2009 SMP/MTs) Setiap sisi suatu kubus dituliskan sebuah bilangan asli. Setiap titik sudutnya diberi nilai yang merupakan hasil kali dari tiga bilangan pada tiga sisi yang berpotongan di titik sudut tersebut. Jika jumlah semua bilangan pada titik-titik sudut tersebut sama dengan 1001, tentukan jumlah semua bilangan yang dituliskan pada sisi-sisi kubus tersebut.
+          </p>
+        </div>
+        <div class="panel-footer">
+          <div class="input-group">
+            <input class="form-control" type="text">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-primary" tabindex="-1">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Soal No . 5
+        </div>
+        <div class="panel-body">
+          <div class="col-sm-4 pull-right">
+            <a href="#" class="thumbnail pull-right">{!! HTML::image('img/geom.jpg') !!}</a>
+          </div>
+          <p>
+            Lorem ipsum dolor sit ametnim ...
+          </p>
+        </div>
+        <div class="panel-footer">
+          <a href="#" class="btn btn-default btn-sm">Yes</a> <a href="#" class="btn btn-default btn-sm">No</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="text-center">
+    <ul class="pagination">
+      <li>
+        <a href="#">PREV</a>
+      </li>
+      <li>
+        <a href="#">1</a>
+      </li>
+      <li class="active">
+        <a href="#">2</a>
+      </li>
+      <li>
+        <a href="#">3</a>
+      </li>
+      <li>
+        <a href="#">4</a>
+      </li>
+      <li>
+        <a href="#">5</a>
+      </li>
+      <li>
+        <a href="#">NEXT</a>
+      </li>
+    </ul>
+  </div>
+</div>
 {% endblock %}

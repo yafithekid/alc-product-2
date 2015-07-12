@@ -1,0 +1,75 @@
+body {
+  background-color: rgb(241, 242, 246);  
+}
+
+.badge-title {
+  font-size: 1.1em;
+}
+
+.badge-title i {
+  font-size: 0.8em;
+  float: right;
+}
+
+.badge-content {
+  border-top: 1px solid #CCD1D9;
+  padding: 10px;
+}
+
+.badge-photo {
+  width: 35%;
+  float: left;
+}
+
+.badge-photo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.badge-desc {
+  width: 65%;
+  float: left;
+}
+
+ul.medals {
+  list-style: none;
+  padding-left: 10px;
+}
+
+ul.medals li:before{
+  content: "• ";
+  color:red;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+ul.medals li.gold:before{
+  color: #FC0;
+}
+
+ul.medals li.silver:before{
+  color: #C5C5C5;
+}
+
+ul.medals li.bronze:before{
+  color: #C96;
+}
+
+ul.medals li {
+  display: inline;
+}
+
+.badge-content:after {
+  clear: both;
+}
+
+#header {
+  border-radius: 0%;
+}
+#header a {
+  color: #F5F7FA
+}
+#header a:hover, #header a:focus{
+  color: #FFFFFF
+}
