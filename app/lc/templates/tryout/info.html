@@ -1,0 +1,95 @@
+{% extends 'master-sidebar.html' %}
+{% load staticfiles %}
+{% block content %}
+{{ block.super }}
+<div class='well col-md-9'>
+  <div class='content-title'>
+    Judul Tryout
+  </div>
+  <div class='content-desc'>
+      <div class='col-md-8'>
+        <div>
+        Lorem ipsum dolor sit amet
+        </div>
+
+      </div>
+      <div class='col-md-4'>
+        <dl class='tryout-detail'>
+          <dt>Durasi</dt>
+          <dd>120 menit</dd>
+          <dt>Waktu mulai</dt>
+          <dd>Senin, 17 Juli 2015 09:00</dd>
+          <dt>Waktu selesai</dt>
+          <dd>Senin, 18 Juli 2015 09:00</dd>
+        </dl>
+        <a href='#' class='btn btn-primary btn-block'>Daftar</a>
+      </div>
+      <div class='clear'></div>
+      <div class='col-md-12'>
+        <div><b>Penyelenggara</b></div>
+        <div class='tryout-manager col-md-4'>
+          <div class='tryout-manager-photo'>
+            <img src='{% static 'lc/img/silent-magician.jpg' %}'>
+          </div>
+          <div class='tryout-manager-desc'>
+            <dl>
+              <dt>Reza Azhari</dt>
+              <dd>Teacher</dd>
+            </dl>
+          </div>
+        </div>
+        <div class='tryout-manager col-md-4'>
+          <div class='tryout-manager-photo'>
+            <img src='{% static 'lc/img/silent-magician.jpg' %}'>
+          </div>
+          <div class='tryout-manager-desc'>
+            <dl>
+              <dt>Reza Azhari</dt>
+              <dd>Teacher</dd>
+            </dl>
+          </div>
+        </div>
+        <div class='tryout-manager col-md-4'>
+          <div class='tryout-manager-photo'>
+            <img src='{% static 'lc/img/silent-magician.jpg' %}'>
+          </div>
+          <div class='tryout-manager-desc'>
+            <dl>
+              <dt>Reza Azhari</dt>
+              <dd>Teacher</dd>
+            </dl>
+          </div>
+        </div>
+        <div class='tryout-manager col-md-4'>
+          <div class='tryout-manager-photo'>
+            <img src='{% static 'lc/img/silent-magician.jpg' %}'>
+          </div>
+          <div class='tryout-manager-desc'>
+            <dl>
+              <dt>Reza Azhari</dt>
+              <dd>Teacher</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      
+      <div class='clearfix'></div>
+      <div class='tryout-contestant col-md-12'>
+        <div style='padding-bottom:10px;'>
+          <b>Peserta</b>
+        </div>
+        <table class='table table-condensed '>
+          <thead>
+            <tr><th>Nama</th><th>Asal Sekolah</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>Muhammad Yafi</td><td>SMAN 1 Yogyakarta</td></tr>
+          <tr><td>Muhammad Yafi</td><td>SMAN 1 Yogyakarta</td></tr>
+          <tr><td>Muhammad Yafi</td><td>SMAN 1 Yogyakarta</td></tr>
+          <tr><td>Muhammad Yafi</td><td>SMAN 1 Yogyakarta</td></tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+{% endblock %}

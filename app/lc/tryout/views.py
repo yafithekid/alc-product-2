@@ -8,3 +8,6 @@ def index(request):
 
 def read(request,_id):
   return render(request,"tryout/read.html",{})
+
+def info(request,_id):
+  return render(request,"tryout/info.html",{})

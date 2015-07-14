@@ -8,7 +8,7 @@ def index(request):
 	context = RequestContext(request,{})
 	return HttpResponse(template.render(context))
 
-def read(request):
+def read(request,_id):
 	template = loader.get_template("problem/read.html")
 	context = RequestContext(request,{})
 	return HttpResponse(template.render(context))

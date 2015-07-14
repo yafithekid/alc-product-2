@@ -1,4 +1,38 @@
-{% extends 'master.html' %}
+{% extends 'master-sidebar.html' %}
+{% load staticfiles %}
 {% block content %}
-this is problem.read file s
+{{ block.super }}
+<div class='well col-md-9'>
+<div class='content-title'>Judul Soal</div>
+<div class='content-desc'>
+  When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+</div>
+<form class='form-inline'>
+<div class="input-group">
+  <input class="form-control" type="text" placeholder='Jawaban'>
+  <div class="input-group-btn">
+    <button type="button" class="btn btn-primary" tabindex="-1">Jawab</button>
+  </div>
+</div>
+</form>
+</div>
+{% endblock %}
+{% block script %}
+{{ block.super}}
+
+<!-- <script src="{% static 'vendor/ckeditor-standard/ckeditor.js' %}"></script> -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {ignoreClass:"panel",inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script src="//cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
+<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+<script>
+CKEDITOR.replace("content");
+$("#preview-btn").click(function(){
+  $("#preview-content").html(CKEDITOR.instances['content'].getData());
+  MathJax.Hub.Rerender();
+});
+</script>
 {% endblock %}

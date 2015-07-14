@@ -39,6 +39,10 @@ body {
   margin-bottom: 20px;
 }
 
+.content-desc {
+  padding: 0px 5px 10px 5px;
+}
+
 ul.medals {
   list-style: none;
   padding-left: 10px;
@@ -69,6 +73,41 @@ ul.medals li {
 
 .badge-content:after {
   clear: both;
+}
+
+.tryout-detail dd {
+  padding-bottom: 5px;
+}
+
+.tryout-contestant {
+  padding-top: 20px;
+}
+.tryout-contestant table {
+  font-size: 0.8em;
+}
+
+.tryout-manager {
+  padding-top: 10px;
+}
+.tryout-manager img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.tryout-manager:after {
+  clear: both;
+}
+
+.tryout-manager .tryout-manager-photo {
+  width: 35%;
+  float: left;
+}
+
+.tryout-manager .tryout-manager-desc {
+  width: 65%;
+  float: left;
+  padding-top: 5px;
 }
 
 #header {
