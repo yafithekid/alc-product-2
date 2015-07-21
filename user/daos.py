@@ -8,4 +8,4 @@ class UserDao:
 
   @staticmethod
   def findById(id: str):
-    return User.objects(id=id).first()
+    return User.objects.filter(id__exact=id).first()

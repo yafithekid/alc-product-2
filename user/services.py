@@ -25,7 +25,7 @@ class UserService:
 
   @staticmethod
   def findByEmail(email:str):
-    return User.objects(email=email).first()
+    return User.objects.filter(email__exact=email).first()
 
   @staticmethod
   def addUser(email,password,name):
