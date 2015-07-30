@@ -1,5 +1,12 @@
 {% extends 'master-sidebar.html' %}
 {% block content %}
 {{ block.super }}
-this is material.index file s
+<div class="well col-md-9">
+    <div class="content-desc">
+        <div class="col-md-4 col-md-offset-8">
+            {% include "material/_search.html" %}
+        </div>
+        <a href="{% url 'material.read' '123' %}">Lihat</a>
+    </div>
+</div>
 {% endblock %}

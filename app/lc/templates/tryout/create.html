@@ -2,6 +2,13 @@
 {% block content %}
 {{ block.super }}
 <div class='well col-md-9'>
-  this is tryout.create
+    <div class="content-title-admin">
+        Buat Tryout
+    </div>
+    <div class="content-desc">
+        <form action="{% url 'tryout.create' %}" method="post">
+        {% include "tryout/_form.html" with button_name='Buat'%}
+        </form>
+    </div>
 </div>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends 'master.html' %}
 {% load staticfiles %}
 {% block content %}
-<div class="col-sm-3">
+<div class="col-md-3">
   <div class='well'>
     <div class='badge-title'>
-      Muhammad Yafi <a href='#'><i class='glyphicon glyphicon-pencil'></i></a>
+      Muhammad Yafi <a href='{% url "profile.update" %}'><i class='glyphicon glyphicon-pencil'></i></a>
     </div>
     <div class='badge-content'>
       <div class='badge-photo'>

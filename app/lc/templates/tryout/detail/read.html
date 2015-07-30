@@ -1,5 +1,39 @@
 {% extends 'master-sidebar.html' %}
 {% block content %}
 {{block.super}}
-this is tryout.read
+<div class="well col-md-9">
+    <div class="content-title-admin">
+        Judul Tryout
+    </div>
+    <div class="content-desc">
+        <div class="tryout-timer">
+            Sisa waktu: 17 menit 20 detik
+        </div>
+        <div class="tryout-problem">
+            When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+        </div>
+        <div class="tryout-answer">
+            {% include 'tryout/detail/problem/multiple_choice.html' with answer="B" %}
+        </div>
+        <div class="tryout-footer">
+            <div class="col-md-10">
+                <ul class="pagination tryout-pagination">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-primary">Finish</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{{ block.super}}
+{% include 'scripts/mathjax.html' %}
 {% endblock %}

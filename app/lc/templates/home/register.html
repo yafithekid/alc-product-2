@@ -1,6 +1,6 @@
 {% extends 'master.html' %}
 {% block content %}
-<form action='{% url 'home.register' %}' method='post'>
+<form action='{% url "register" %}' method='post'>
   {% csrf_token %}
   {{form}}
   <input type='submit' value='Register' />

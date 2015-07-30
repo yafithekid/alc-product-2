@@ -14,14 +14,28 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar">
         <li>
-          <a href="#">Training</a>
+          <a href="{% url 'home' %}">Home</a>
         </li>
         <li>
-          <a class="nav-link" href="#">Blog</a>
+          <a href="{% url 'about' %}">About</a>
         </li>
         <li>
-          <a class="nav-link" href="#">Setting</a>
+          <a href="{% url 'contact' %}">Contact</a>
         </li>
+      </ul>
+      <ul class="nav navbar-nav navbar pull-right">
+          <li>
+              <a href="{% url 'material.create' %}">Materi Baru</a>
+          </li>
+          <li>
+              <a href="{% url 'problem.create' %}">Soal Baru</a>
+          </li>
+          <li>
+              <a href="{% url 'tryout.create' %}">Tryout Baru</a>
+          </li>
+          <li>
+              <a href="{% url 'login' %}">Login</a>
+          </li>
       </ul>
     </div>
   </div>

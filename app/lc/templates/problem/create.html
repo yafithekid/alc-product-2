@@ -3,7 +3,7 @@
 {% block content %}
 {{ block.super }}
 <div class='well col-md-9'>
-<div class='content-title'>Buat soal baru</div>
+<div class='content-title-admin'>Buat soal baru</div>
 <form action='{% url 'problem.create' %}' method='post'>
   <div class='form-group'>
     <input type='text' class='form-control' placeholder='Judul' id='title'/>
@@ -16,10 +16,7 @@ $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</textarea>
     <button class='btn btn-default' type='button' id='preview-btn' data-toggle='modal' data-target='#preview'>Preview</button>
     <input type='submit' value='Save' class='btn btn-primary'/>
   </div>
-  W
 </form>
-<div id='preview-content'>test
-</div>
 </div>
 
 <!-- 

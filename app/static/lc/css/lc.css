@@ -32,11 +32,17 @@ body {
   float: left;
 }
 
-.content-title {
+.content-title-user {
+  text-align:center;
+  font-size: 1.5em;
+}
+
+.content-title-admin {
   font-size: 1.5em;
   padding:5px;
-  border-bottom: 1px solid #CCD1D9;
+  border-bottom: 1px solid #AAB2BD;
   margin-bottom: 20px;
+  text-transform: capitalize;
 }
 
 .content-desc {
@@ -75,6 +81,36 @@ ul.medals li {
   clear: both;
 }
 
+.material-download {
+  text-align:right;
+}
+
+.material-content {
+  padding-top:10px;
+  padding-bottom:10px;
+  text-align: justify;
+}
+
+.tryout-footer {
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.tryout-pagination {
+  margin: 0px;
+}
+
+.tryout-timer {
+  font-size:0.85em;
+  text-align: right;
+  padding-bottom: 10px;
+  padding-right:10px;
+}
+
+.tryout-answer {
+  padding-top: 10px;
+}
+
 .tryout-detail dd {
   padding-bottom: 5px;
 }
@@ -82,6 +118,7 @@ ul.medals li {
 .tryout-contestant {
   padding-top: 20px;
 }
+
 .tryout-contestant table {
   font-size: 0.8em;
 }

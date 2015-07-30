@@ -1,5 +1,23 @@
 {% extends 'master-sidebar.html' %}
 {% block content %}
 {{block.super}}
-this is material.create file s
+<div class="well col-md-9">
+    <div class="content-title-admin">Buat Materi Baru</div>
+    <div class="content-desc">
+        <form action="{% url 'material.create' %}" method="post">
+        {% include "material/_form.html" with button_value='Buat' %}
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+{{block.super}}
+{% include "scripts/ckeditor.html" %}
+<script>
+CKEDITOR.replace("content");
+$("#preview-btn").click(function(){
+  $("#preview-content").html(CKEDITOR.instances['content'].getData());
+  MathJax.Hub.Rerender();
+});
+</script>
 {% endblock %}

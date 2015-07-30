@@ -1,5 +1,18 @@
 {% extends 'master-sidebar.html' %}
 {% block content %}
 {{block.super}}
-this is material.read file s
+<div class="well col-md-9">
+    <div class="content-title-user">
+        Judul Materi
+    </div>
+    <div class="content-desc">
+
+        <div class="material-download">
+            <a href="#" class="btn btn-primary">Download sebagai PDF</a>
+        </div>
+        <div class="material-content">
+            {% lorem %}
+        </div>
+    </div>
+</div>
 {% endblock %}
