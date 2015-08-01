@@ -2,6 +2,11 @@ body {
   background-color: rgb(241, 242, 246);  
 }
 
+.row {
+  margin-right : 0px;
+  margin-left : 0px;
+}
+
 .badge-title {
   font-size: 1.1em;
 }
@@ -31,6 +36,21 @@ body {
   width: 65%;
   float: left;
 }
+
+.card-header {
+  font-size: 1.3em;
+  padding:5px;
+}
+
+.card-content {
+  padding: 10px;
+  text-align: justify;
+}
+
+.card-footer {
+  padding-right: 10px;
+}
+
 
 .content-title-user {
   text-align:center;

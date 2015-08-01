@@ -1,0 +1,25 @@
+<div class="well">
+    <div class="card-header">
+        <div class="row">
+        {% block card_header %}
+            <a href="#">Card header</a>
+        {% endblock %}
+        </div>
+    </div>
+    <div class="card-content">
+        <div class="row">
+        {% block card_content %}
+            {% lorem %}
+        {% endblock %}
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+        {% block card_footer %}
+        <span class="pull-right">
+            <a href="#">Descriptor</a>
+        </span>
+        {% endblock %}
+        </div>
+    </div>
+</div>

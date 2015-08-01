@@ -1,12 +1,14 @@
 {% extends 'master-sidebar.html' %}
 {% block content %}
 {{ block.super }}
-<div class='well col-md-9'>
-    <div class="content-desc">
-        <div class="col-md-4 col-md-offset-8">
-        {% include 'tryout/_search.html' %}
+<div class='col-md-9'>
+    <div class="well">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-8">
+            {% include 'tryout/_search.html' %}
+            </div>
         </div>
-        <a href="{% url 'tryout.info' 123 %}">Lihat</a>
     </div>
+    {% include 'tryout/_card.html' with title='Judul Tryout' %}
 </div>
 {% endblock %}
