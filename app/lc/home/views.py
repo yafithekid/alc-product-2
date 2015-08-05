@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from . import forms
+from lc.problem.api.services import ProblemService
 from user.services import UserService
 from commons.commands import CommandBus
 from user.auth.commands import RegisterUser, LoginUser
-
+from lc.containers import lc_service_container
 
 def register(request):
   register_success = False
@@ -50,9 +51,13 @@ def login(request):
 
 
 def home(request):
-  return render(request, 'home/home.html', {})
+    problem_service = lc_service_container.load(ProblemService.__name__)
+    assert isinstance(problem_service, ProblemService)
+    problem_service.findById("hello_world")
+    return render(request, 'home/home.html', {})
 
 def about(request):
   return render(request, "home/about.html", {})
+
 def contact(request):
   return render(request, "home/contact.html",{})
