@@ -33,6 +33,7 @@ class Problem(models.Model):
  id = models.AutoField(primary_key=True)
  slug = models.SlugField(max_length=255)
  title = models.CharField(max_length=255)
+ answer = models.CharField(max_length=255)
  created_at = models.DateTimeField(auto_now_add = True)
  updated_at = models.DateTimeField(auto_now = True)
  description = models.TextField(null=True)

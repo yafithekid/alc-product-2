@@ -1,0 +1,20 @@
+<form action='{% url url %}' method='post'>
+    {% csrf_token %}
+    <div class='form-group'>
+        <input name='title' type='text' class='form-control' placeholder='Judul' id='title' value="{{form.title.value | default_if_none:''}}"/>
+        <span class="error">{{form.title.errors}}</span>
+    </div>
+        <div class='form-group'>
+        <textarea class='form-control' id='content' value="{{form.content.value | default_if_none:''}}"></textarea>
+        <span class="error">{{form.title.errors}}</span>
+    </div>
+    {% if type == available_types.MC %}
+        {% include "problem/detail/answer/form/_multiple_choice.html" %}
+    {% else %}
+        {% include "problem/detail/answer/form/_short_answer.html" %}
+    {% endif %}
+    <div class='form-group'>
+    <button class='btn btn-default' type='button' id='preview-btn' data-toggle='modal' data-target='#preview'>Preview</button>
+    <input type='submit' value='Save' class='btn btn-primary'/>
+    </div>
+</form>
