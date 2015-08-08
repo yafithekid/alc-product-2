@@ -1,5 +1,4 @@
 from django import forms
-from user.services import UserService
 
 class LoginForm(forms.Form):
   email = forms.EmailField(max_length=200)
@@ -21,8 +20,8 @@ class RegisterForm(forms.Form):
 
   def clean_email(self):
     email = self.cleaned_data.get('email')
-    user = UserService.findByEmail(email)
-    if (user != None):
-      raise forms.ValidationError(u'Email address already exists')
+    # user = UserService.findByEmail()
+    # if (user != None):
+    #   raise forms.ValidationError(u'Email address already exists')
     return email
       

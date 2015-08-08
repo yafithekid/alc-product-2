@@ -1,5 +1,4 @@
 from django import forms
-from user.services import UserService
 
 class ProblemForm(forms.Form):
   title = forms.CharField(max_length=200,required=True)

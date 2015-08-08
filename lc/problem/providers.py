@@ -11,5 +11,6 @@ class DaoProvider(Provider):
 
 class ProblemProvider(Provider):
     def register(self, interface_name, container, containers):
+        print(containers)
         lc_dao_container = containers["LCDaoContainer"]
         container.save(interface_name, ProblemServiceImpl(lc_dao_container.load(ProblemDao.__name__)))

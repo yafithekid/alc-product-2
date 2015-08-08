@@ -8,7 +8,7 @@ class Provider:
 
 
 class Container:
-    def __init__(self, config, containers):
+    def __init__(self, config, containers = None):
         self.__services = {}
         for interface_name, provider in config.items():
             if not isinstance(provider,Provider):

@@ -101,7 +101,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+AUTHENTICATION_BACKENDS = (
+    'user.auth.BasicAuthBackend',
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
