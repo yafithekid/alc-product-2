@@ -3,17 +3,17 @@ class MockServiceImpl:
 
 
 class Provider:
-    def register(self, interface_name, container, containers):
+    def register(self,container, containers):
         raise NotImplementedError
 
 
 class Container:
-    def __init__(self, config, containers = None):
+    def __init__(self,providers, containers = None):
         self.__services = {}
-        for interface_name, provider in config.items():
+        for provider in providers:
             if not isinstance(provider,Provider):
                 raise NotAProviderException
-            provider.register(interface_name, self, containers)
+            provider.register(self, containers)
 
     def save(self, name, service_impl):
         if name in self.__services:

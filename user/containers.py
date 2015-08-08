@@ -4,8 +4,8 @@ from .config import service_providers, dao_providers
 
 
 class UserDaoContainer(Container):
-    def __init__(self, providers,):
-        super().__init__(providers,None)
+    def __init__(self, providers,containers):
+        super().__init__(providers,containers)
 
 
 class UserServiceContainer(Container):

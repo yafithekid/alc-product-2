@@ -1,16 +1,16 @@
 from commons.ioc import Provider
 from lc.problem.api.daos import ProblemDao
+from lc.problem.api.services import ProblemService
 from lc.problem.impl.daos import ProblemDaoImpl
 from lc.problem.impl.services import ProblemServiceImpl
 
 
-class DaoProvider(Provider):
-    def register(self, interface_name, container, containers):
-        container.save(interface_name, ProblemDaoImpl())
+class ProblemDaoProvider(Provider):
+    def register(self, container, containers):
+        container.save(ProblemDao.__name__, ProblemDaoImpl())
 
 
-class ProblemProvider(Provider):
-    def register(self, interface_name, container, containers):
-        print(containers)
+class ProblemServiceProvider(Provider):
+    def register(self, container, containers):
         lc_dao_container = containers["LCDaoContainer"]
-        container.save(interface_name, ProblemServiceImpl(lc_dao_container.load(ProblemDao.__name__)))
+        container.save(ProblemService.__name__, ProblemServiceImpl(lc_dao_container.load(ProblemDao.__name__)))

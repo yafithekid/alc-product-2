@@ -1,11 +1,11 @@
 from lc.problem.api.daos import ProblemDao
-from lc.problem.providers import ProblemProvider, DaoProvider
+from lc.problem.providers import ProblemServiceProvider, ProblemDaoProvider
 from lc.problem.api.services import ProblemService
 
-dao_providers = {
-    ProblemDao.__name__ : DaoProvider()
-}
+dao_providers = [
+    ProblemDaoProvider()
+]
 
-service_providers = {
-    ProblemService.__name__ : ProblemProvider()
-}
+service_providers = [
+    ProblemServiceProvider()
+]
