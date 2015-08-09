@@ -8,7 +8,7 @@ class UserServiceImpl(UserService):
         self.user_dao = user_dao
 
     def findByEmail(self, email: str):
-        return self.user_dao.findByEmail(email)
+        return self.user_dao.find_by_email(email)
 
     def addUser(self,email: str,password: str,name: str):
         user = User(email = email,password = password,name = name)

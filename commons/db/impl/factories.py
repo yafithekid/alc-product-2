@@ -1,13 +1,21 @@
 from pymongo import MongoClient
-from commons.db.api.factories import MongoClientFactory
+from pymongo.database import Database
+from commons.db.api.factories import MongoSerializationFactory, MongoDatabaseFactory
+from commons.db.api.services import MongoSerialization
+from commons.db.impl.services import MongoSerializationImpl
 
 
-class MongoClientFactoryImpl(MongoClientFactory):
-    def __init__(self,host='localhost'):
-        self.host = host
+class MongoDatabaseFactoryImpl(MongoDatabaseFactory):
+    def __init__(self, default_host='localhost'):
+        self.default_host = default_host
 
-    def get_lc_client(self):
-        return MongoClient(self.host,27017)
+    def get_db_user(self) -> Database:
+        return MongoClient(self.default_host,27017).get_database("alc-user")
 
-    def get_user_client(self):
-        return MongoClient(self.host,27017)
+    def get_db_lc(self) -> Database:
+        return MongoClient(self.default_host,27017).get_database("alc-lc")
+
+
+class MongoSerializationFactoryImpl(MongoSerializationFactory):
+    def get_instance(self) -> MongoSerialization:
+        return MongoSerializationImpl()

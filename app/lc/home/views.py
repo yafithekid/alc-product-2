@@ -4,8 +4,12 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from . import forms
+from lc.containers import lc_service_container
+from lc.problem.api.services import ProblemService
+from user.api.daos import UserDao
 from user.api.services import UserService
-from user.containers import user_service_container
+from user.collections import User
+from user.containers import user_service_container, user_dao_container
 
 
 def register(request):
@@ -37,6 +41,18 @@ def confirm_register(request, _id):
 
 def login(request):
     login_success = False
+    # TODO change to service
+    user_dao = user_dao_container.load(UserDao.__name__)
+    assert(isinstance(user_dao,UserDao))
+    user = User()
+    user._id = "yafithekid212@gmail.com"
+    user.name = "Muhammad Yafi"
+    user.password = "123"
+
+    user_dao.insert(user)
+    user = user_dao.find_by_email("yafithekid212@gmail.com")
+    print(user)
+
     if (request.method == 'POST'):
         form = forms.LoginForm(request.POST)
         if (form.is_valid()):

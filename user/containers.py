@@ -1,4 +1,4 @@
-from commons.db.containers import db_container
+from commons.db.containers import mongo_container
 from commons.ioc import Container
 from .config import service_providers, dao_providers
 
@@ -14,7 +14,7 @@ class UserServiceContainer(Container):
 
 
 user_dao_container = UserDaoContainer(dao_providers,{
-    "DBContainer": db_container
+    "MongoContainer": mongo_container
 })
 
 user_service_container = UserServiceContainer(service_providers, {
