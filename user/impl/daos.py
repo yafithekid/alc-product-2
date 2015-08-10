@@ -14,7 +14,6 @@ class UserDaoImpl(UserDao):
         self.mongo_serialization_factory = mongo_serialization_factory
         self.mongo_serialization = self.mongo_serialization_factory.get_instance()
         self.db = db
-        print(self.db)
         self.coll = db.get_collection(UserDaoImpl.COLLECTION_NAME)
 
     def find(self, filters: dict):

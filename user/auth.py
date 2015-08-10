@@ -1,6 +1,10 @@
-from user.models import User
+from user.api.services import UserService
+from user.containers import user_service_container
 
 
 class BasicAuthBackend(object):
     def authenticate(self, email = None, password = None):
-        return User(email=email, password=password)
+        user_service = user_service_container.load(UserService.__name__)
+        assert (isinstance(user_service,UserService))
+        user = user_service.find(email = email,password = password)
+        return user

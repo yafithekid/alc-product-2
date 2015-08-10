@@ -17,16 +17,16 @@ def register(request):
     user = None
     if request.method == 'POST':
         form = forms.RegisterForm(request.POST)
-        if (form.is_valid()):
+        if form.is_valid():
             user_service = user_service_container.load(UserService.__name__)
             assert (isinstance(user_service,UserService))
-            user = user_service.addUser(email=form.cleaned_data['email'],password=form.cleaned_data['password'],name=form.cleaned_data['name'])
+            user = user_service.add_user(email=form.cleaned_data['email'],password=form.cleaned_data['password'],name=form.cleaned_data['name'])
             register_success = True
     else:
         form = forms.RegisterForm()
 
     if (register_success):
-        return HttpResponseRedirect(reverse('home.confirm_register', args=[str(user.id)]))
+        return HttpResponseRedirect(reverse('home.confirm_register', args=[str(user._id)]))
     else:
         return render(request, 'home/register.html', {'form': form})
 
@@ -41,21 +41,13 @@ def confirm_register(request, _id):
 
 def login(request):
     login_success = False
-    # TODO change to service
-    user_dao = user_dao_container.load(UserDao.__name__)
-    assert(isinstance(user_dao,UserDao))
-    user = User()
-    user._id = "yafithekid212@gmail.com"
-    user.name = "Muhammad Yafi"
-    user.password = "123"
 
-    user_dao.insert(user)
-    user = user_dao.find_by_email("yafithekid212@gmail.com")
-    print(user)
 
     if (request.method == 'POST'):
         form = forms.LoginForm(request.POST)
         if (form.is_valid()):
+            user_service = user_service_container.load(UserService.__name__)
+            assert(isinstance(user_service,UserService))
             user = authenticate(email=form.cleaned_data['email'],password=form.cleaned_data['password'])
             if user is None:
                 raise Exception("Invalid username/password")

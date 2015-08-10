@@ -1,6 +1,16 @@
+from user.collections import User
+
+
 class UserService():
-    def findByEmail(self,email: str):
+    def find_by_email(self, email: str) -> User:
         raise NotImplementedError
 
-    def addUser(self,email: str,password: str,name: str):
+    def find(self,email: str,password: str) -> User:
         raise NotImplementedError
+
+    def add_user(self, email: str, password: str, name: str) -> User:
+        raise NotImplementedError
+
+    def hash_password(self,password: str) -> str:
+        raise NotImplementedError
+
