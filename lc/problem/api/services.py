@@ -1,3 +1,3 @@
 class ProblemService:
-    def findById(self,id: int):
+    def find_by_id(self, id: int):
         raise NotImplementedError

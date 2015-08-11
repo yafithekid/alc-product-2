@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lc',
-    'user',
+    'user'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,6 +105,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 AUTHENTICATION_BACKENDS = (
     'user.auth.BasicAuthBackend',
 )
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 

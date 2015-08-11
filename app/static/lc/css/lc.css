@@ -11,6 +11,9 @@ body {
   font-size: 1.1em;
 }
 
+.error {
+  color: red;
+}
 .badge-title i {
   font-size: 0.8em;
   float: right;

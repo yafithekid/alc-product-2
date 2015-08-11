@@ -1,7 +1,6 @@
 from user.api.services import UserService
 from user.containers import user_service_container
 
-
 class BasicAuthBackend(object):
     def authenticate(self, email = None, password = None):
         user_service = user_service_container.load(UserService.__name__)

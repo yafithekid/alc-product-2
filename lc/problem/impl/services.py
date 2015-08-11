@@ -4,7 +4,7 @@ from lc.problem.api.services import ProblemService
 
 class ProblemServiceImpl(ProblemService):
 
-    def findById(self, id: int):
+    def find_by_id(self, id: int):
         print("Finding problem with id = "+ id)
 
     def __init__(self,problem_dao: ProblemDao):

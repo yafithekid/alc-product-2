@@ -6,6 +6,9 @@ import hashlib
 
 
 class UserServiceImpl(UserService):
+    def find_by_id(self, _id: str) -> User:
+        return self.user_dao.find_by_id(_id)
+
     def __init__(self, user_dao: UserDao):
         self.user_dao = user_dao
 
@@ -18,13 +21,12 @@ class UserServiceImpl(UserService):
         return self.user_dao.find_by_email(email)
 
     def find(self,email: str,password: str) -> User:
-        return self.user_dao.find({"email":email,password:self.hash_password(password)})
+        return self.user_dao.find({"email":email,"password":self.hash_password(password)})
 
-    def add_user(self, email: str, password: str, name: str) -> User:
+    def add_user(self, email: str, password: str, name: str) -> str:
         user = User()
-        user._id=email
+        user.email=email
         user.password=self.hash_password(password)
         user.name=name
 
-        self.user_dao.insert(user)
-        return user
+        return self.user_dao.insert(user)

@@ -50,7 +50,7 @@ class StringField(Field):
                 error = True
             else:
                 instance = getattr(value, field_name)
-                if (isinstance(instance, Field)):
+                if isinstance(instance, Field):
                     error = True
                 else:
                     error = instance is None
@@ -58,7 +58,7 @@ class StringField(Field):
                 value.add_error(field_name, "This field is required")
         else:
             field = getattr(value, field_name)
-            if not isinstance(field, str):
+            if not (isinstance(field,Field)) and not isinstance(field, str):
                 value.add_error(field_name, "Not a string")
 
             if not (self.max_length is None) and len(field) > self.max_length:

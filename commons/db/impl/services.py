@@ -1,5 +1,6 @@
 from commons.db.api.services import MongoSerialization
 from commons.db.persistence import Entity
+from commons.fields import Field
 
 
 class MongoSerializationImpl(MongoSerialization):
@@ -8,13 +9,11 @@ class MongoSerializationImpl(MongoSerialization):
         if objek is None:
             entity = None
         else:
-            print(objek)
             for key,value in objek.items():
                 setattr(entity, key, value)
         return entity
 
     def to_mongo(self, objek: Entity, clazz) -> dict:
-        print(objek)
         objek.validate()
         if objek.has_error():
             print("objek has error")
@@ -23,6 +22,8 @@ class MongoSerializationImpl(MongoSerialization):
         field_names = clazz.get_field_names()
         for field_name in field_names:
             print(field_name)
-            ret[field_name] = getattr(objek, field_name)
+            field = getattr(objek,field_name)
+            if not (isinstance(field,Field)):
+                ret[field_name] = getattr(objek, field_name)
         print(ret)
         return ret

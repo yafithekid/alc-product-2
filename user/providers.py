@@ -2,6 +2,8 @@ from commons.db.api.factories import MongoSerializationFactory, MongoDatabaseFac
 from commons.ioc import Provider
 from user.api.daos import UserDao
 from user.api.services import UserService
+from user.auth.api.services import AuthService
+from user.auth.impl.services import AuthServiceImpl
 from user.impl.daos import UserDaoImpl
 from user.impl.services import UserServiceImpl
 
@@ -23,3 +25,8 @@ class UserServiceProvider(Provider):
     def register(self, container, containers):
         user_dao_container = containers["UserDaoContainer"]
         container.save(UserService.__name__, UserServiceImpl(user_dao_container.load(UserDao.__name__)))
+
+class AuthServiceProvider(Provider):
+    def register(self,container, containers):
+        user_service = container.load(UserService.__name__)
+        container.save(AuthService.__name__,AuthServiceImpl(user_service))
