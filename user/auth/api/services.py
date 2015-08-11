@@ -11,3 +11,9 @@ class AuthService:
 
     def logout(self,_session:session):
         raise NotImplementedError
+
+    def is_logged_in(self,_session:session):
+        raise NotImplementedError
+
+    def has_role(self,user: User,role_name:str):
+        raise NotImplementedError

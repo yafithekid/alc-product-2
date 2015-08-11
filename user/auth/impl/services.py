@@ -23,3 +23,10 @@ class AuthServiceImpl(AuthService):
     def attempt(self, email: str, password: str) -> User:
         user = self.user_service.find(email=email,password=password)
         return user
+
+    def is_logged_in(self,_session:session):
+        return _session.has_key(self.KEY) and not (_session[self.KEY] is None)
+
+    def has_role(self, user: User, role_name: str):
+        # TODO impl
+        return False

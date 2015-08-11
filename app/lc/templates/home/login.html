@@ -1,6 +1,10 @@
 {% extends 'master.html' %}
 {% block content %}
-<form action='{% url "login" %}' method='post'>
+{% if 'next' in request.GET %}
+  <form action='{% url "login" %}?next={{request.GET.next}}' method='post'>
+{% else %}
+  <form action='{% url "login" %}' method="post">
+{% endif %}
   {% csrf_token %}
   {{form}}
   <input type='submit' value='Login' />

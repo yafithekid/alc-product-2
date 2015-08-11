@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
 from . import forms
 from lc.containers import lc_service_container
+from lc.filters import authenticated
 from lc.problem.api.services import ProblemService
 from user.api.services import UserService
 from user.auth.api.services import AuthService
@@ -16,12 +17,13 @@ def register(request):
         form = forms.RegisterForm(request.POST)
         if form.is_valid():
             user_service = user_service_container.load(UserService.__name__)
-            assert (isinstance(user_service,UserService))
+            assert (isinstance(user_service, UserService))
             if user_service.find_by_email(email=form.cleaned_data['email']) is None:
-                _id = user_service.add_user(email=form.cleaned_data['email'],password=form.cleaned_data['password'],name=form.cleaned_data['name'])
+                _id = user_service.add_user(email=form.cleaned_data['email'], password=form.cleaned_data['password'],
+                                            name=form.cleaned_data['name'])
                 return HttpResponseRedirect(reverse('confirm_register', args=[_id]))
             else:
-                form.add_error("email","Email already exist")
+                form.add_error("email", "Email already exist")
     else:
         form = forms.RegisterForm()
     return render(request, 'home/register.html', {'form': form})
@@ -29,7 +31,7 @@ def register(request):
 
 def confirm_register(request, _id):
     user_service = user_service_container.load(UserService.__name__)
-    assert (isinstance(user_service,UserService))
+    assert (isinstance(user_service, UserService))
     user = user_service.find_by_id(_id=_id)
     if user is None:
         return HttpResponseNotFound("User doesn't exist")
@@ -43,13 +45,15 @@ def login(request):
         form = forms.LoginForm(request.POST)
         if form.is_valid():
             auth_service = user_service_container.load(AuthService.__name__)
-            assert(isinstance(auth_service,AuthService))
-            user = auth_service.attempt(email = form.cleaned_data['email'],password=form.cleaned_data['password'])
+            assert (isinstance(auth_service, AuthService))
+            user = auth_service.attempt(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is None:
                 raise Exception("Invalid username/password")
             else:
-                auth_service.login(user,request.session)
-                return HttpResponseRedirect(reverse('home'))
+                auth_service.login(user, request.session)
+                next_url = request.GET.get('next', reverse('home'))
+                return HttpResponseRedirect(next_url)
+
     else:
         form = forms.LoginForm()
     if not login_success:
@@ -57,11 +61,13 @@ def login(request):
     else:
         return HttpResponse("login_success")
 
+
 def logout(request):
     auth_service = user_service_container.load(AuthService.__name__)
-    assert (isinstance(auth_service,AuthService))
+    assert (isinstance(auth_service, AuthService))
     auth_service.logout(request.session)
     return HttpResponseRedirect(reverse("home"))
+
 
 def home(request):
     problem_service = lc_service_container.load(ProblemService.__name__)
@@ -70,9 +76,9 @@ def home(request):
     return render(request, 'home/home.html', {})
 
 
+@authenticated
 def about(request):
     return render(request, "home/about.html", {})
-
 
 def contact(request):
     return render(request, "home/contact.html", {})
