@@ -106,3 +106,48 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'app/static')
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'lc_logfile': {
+            'level':'ERROR',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'log','lc.log'),
+            'maxBytes': 1024*1024*15, # 15MB
+            'backupCount': 10,
+        },
+        'user_logfile': {
+            'level':'ERROR',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'log','user.log'),
+            'maxBytes': 1024*1024*15, # 15MB
+            'backupCount': 10,
+        }
+
+    },
+    'loggers': {
+        'lc': {
+            'handlers': ['lc_logfile'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'user': {
+            'handlers': ['user_logfile'],
+            'level': 'ERROR',
+            'propagate' : True,
+        }
+
+    }
+}
