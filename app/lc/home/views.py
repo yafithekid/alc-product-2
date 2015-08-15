@@ -18,12 +18,14 @@ def register(request):
         if form.is_valid():
             user_service = user_service_container.load(UserService.__name__)
             assert (isinstance(user_service, UserService))
-            if user_service.find_by_email(email=form.cleaned_data['email']) is None:
+            if form.cleaned_data['password'] != form.cleaned_data['confirm_password']:
+                form.add_error("confirm_password","Password doesn't match")
+            elif user_service.find_by_email(email=form.cleaned_data['email']) is None:
                 _id = user_service.add_user(email=form.cleaned_data['email'], password=form.cleaned_data['password'],
                                             name=form.cleaned_data['name'])
                 return HttpResponseRedirect(reverse('confirm_register', args=[_id]))
             else:
-                form.add_error("email", "Email already exist")
+                form.add_error(None, "Email already exist")
     else:
         form = forms.RegisterForm()
     return render(request, 'home/register.html', {'form': form})
@@ -48,7 +50,7 @@ def login(request):
             assert (isinstance(auth_service, AuthService))
             user = auth_service.attempt(email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is None:
-                raise Exception("Invalid username/password")
+                form.add_error(None, "Invalid email/password")
             else:
                 auth_service.login(user, request.session)
                 next_url = request.GET.get('next', reverse('home'))
@@ -79,6 +81,7 @@ def home(request):
 @authenticated
 def about(request):
     return render(request, "home/about.html", {})
+
 
 def contact(request):
     return render(request, "home/contact.html", {})

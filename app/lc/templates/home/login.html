@@ -1,13 +1,33 @@
 {% extends 'master.html' %}
 {% block content %}
-{% if 'next' in request.GET %}
-  <form action='{% url "login" %}?next={{request.GET.next}}' method='post'>
-{% else %}
-  <form action='{% url "login" %}' method="post">
-{% endif %}
-  {% csrf_token %}
-  {{form}}
-  <input type='submit' value='Login' />
-</form>
+<div class="col-md-4 col-md-offset-4">
+  <div class="well">
+    <h5>Login</h5>
+    {% if 'next' in request.GET %}
+      <form action='{% url "login" %}?next={{request.GET.next}}' method='post'>
+    {% else %}
+      <form action='{% url "login" %}' method="post">
+    {% endif %}
+      {% csrf_token %}
+        <span class="error">
+        {{form.non_field_errors}}
+        </span>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" value="{{form.email.value | default_if_none:''}}"/>
+          <span class="error">{{form.email.errors}}</span>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" value=""/>
+          <span class="error">{{form.password.errors}}</span>
+        </div>
+        Tidak punya akun? <a href='{% url "register" %}'>Daftar di sini</a>
+        <div class="form-group">
+          <input type='submit' value='Login' class="btn btn-primary" />
+        </div>
 
+    </form>
+  </div>
+</div>
 {% endblock %}

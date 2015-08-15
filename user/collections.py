@@ -1,18 +1,10 @@
-from django.contrib.auth.models import User
 from commons.db.persistence import Entity, StringField
+from commons.fields import ObjectIdField
 
 
-class User(Entity,User):
+class User(Entity):
+    _id = ObjectIdField()
     email = StringField(required=True, max_length=255)
     name = StringField(required=True, max_length=255)
     password = StringField(max_length=255)
 
-
-    # django user authentication
-    USERNAME_FIELD = 'email'
-
-    def get_full_name(self):
-        pass
-
-    def get_short_name(self):
-        pass
