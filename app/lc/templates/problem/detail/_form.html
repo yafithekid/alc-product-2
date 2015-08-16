@@ -1,13 +1,18 @@
-<form action='{% url url %}' method='post'>
+<form action='{% url url %}?type={{type}}' method='post'>
     {% csrf_token %}
+    <span class="error">{{form.non_field_errors}}</span>
     <div class='form-group'>
+        <label>Judul</label>
         <input name='title' type='text' class='form-control' placeholder='Judul' id='title' value="{{form.title.value | default_if_none:''}}"/>
         <span class="error">{{form.title.errors}}</span>
     </div>
-        <div class='form-group'>
-        <textarea class='form-control' id='content' value="{{form.content.value | default_if_none:''}}"></textarea>
-        <span class="error">{{form.title.errors}}</span>
+    <div class='form-group'>
+        <label>Pertanyaan</label>
+        <textarea name='question' class='form-control'>{{form.question.value | default_if_none:''}}</textarea>
+        <span class="error">{{form.question.errors}}</span>
     </div>
+    <label>Jawaban</label>
+        <span class="error">{{form.answer.errors}}</span>
     {% if type == available_types.MC %}
         {% include "problem/detail/answer/form/_multiple_choice.html" %}
     {% else %}

@@ -30,7 +30,6 @@ class UserDaoImpl(UserDao):
             self.logger.error(e)
             return None
 
-
     def find(self, _filters: dict):
         try:
             result = self.coll.find_one(_filters)
@@ -65,4 +64,3 @@ class UserDaoImpl(UserDao):
             self.coll.create_index([("email", pymongo.ASCENDING)], background=True, unique=True)
         except Exception as e:
             self.logger.error(e)
-

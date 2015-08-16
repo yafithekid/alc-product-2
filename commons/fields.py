@@ -8,7 +8,7 @@ class ErrorBag:
         self.__errors[key].append(value)
 
     def first(self, key: str) -> str:
-        if (not (key in self.__errors) ) or (self.__errors[key] is None) or (len(self.__errors[key]) == 0):
+        if (not (key in self.__errors)) or (self.__errors[key] is None) or (len(self.__errors[key]) == 0):
             return None
         else:
             return self.__errors[key][0]
@@ -58,7 +58,7 @@ class StringField(Field):
                 value.add_error(field_name, "This field is required")
         else:
             field = getattr(value, field_name)
-            if not (isinstance(field,Field)) and not isinstance(field, str):
+            if not (isinstance(field, Field)) and not isinstance(field, str):
                 value.add_error(field_name, "Not a string")
 
             if not (self.max_length is None) and len(field) > self.max_length:
@@ -120,3 +120,16 @@ class DocumentField(Field):
             field = getattr(value, field_name)
             if not isinstance(field, self.BaseClass):
                 value.add_error(field_name, "Not an instance of " + self.BaseClass.__name__)
+
+
+class ListField(Field):
+    def __init__(self,required=False):
+        self.required = required
+
+    def validate(self, field_name, value):
+        if self.required and isinstance(getattr(value, field_name), Field):
+            value.add_error(field_name, "This field is required")
+        else:
+            field = getattr(value,field_name)
+            if not isinstance(field,list):
+                value.add_error(field_name,"Not an instance of list")

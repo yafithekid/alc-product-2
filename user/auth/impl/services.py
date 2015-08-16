@@ -6,27 +6,42 @@ from user.collections import User
 
 class AuthServiceImpl(AuthService):
     KEY = "auth_user"
+    RBAC_ROLES = {
+        User.ADMIN: [User.ADMIN, User.TEACHER, User.STUDENT],
+        User.TEACHER: [User.TEACHER, User.STUDENT],
+        User.STUDENT: [User.STUDENT]
+    }
 
-    def __init__(self,user_service:UserService):
+    def __init__(self, user_service: UserService):
         self.user_service = user_service
 
     def login(self, user: User, _session: session):
         _session[self.KEY] = {
-            "email" : user.email,
-            "name" : user.name
+            "email": user.email,
+            "name": user.name,
+            "roles": user.roles
         }
 
-    def logout(self,_session:session):
+    def logout(self, _session: session):
         if _session.has_key(self.KEY):
             _session[self.KEY] = None
 
     def attempt(self, email: str, password: str) -> User:
-        user = self.user_service.find(email=email,password=password)
+        user = self.user_service.find(email=email, password=password)
         return user
 
-    def is_logged_in(self,_session:session):
+    def is_logged_in(self, _session: session):
         return _session.has_key(self.KEY) and not (_session[self.KEY] is None)
 
-    def has_role(self, user: User, role_name: str):
-        # TODO impl
-        return False
+    def is_authorized_for(self,_session: session,min_role: str):
+        if not self.is_logged_in(_session):
+            return False
+        user_roles = _session[self.KEY]["roles"]
+
+        roles_available = []
+        for user_role in user_roles:
+            roles_available.extend(self.RBAC_ROLES.get(user_role, []))
+        if min_role in roles_available:
+            return True
+        else:
+            return False

@@ -1,10 +1,12 @@
-from commons.db.persistence import Entity, StringField
-from commons.fields import ObjectIdField
+from commons.db.persistence import Entity
+from commons.fields import StringField, ListField
 
 
 class User(Entity):
-    _id = ObjectIdField()
+    ADMIN = "admin"
+    TEACHER = "teacher"
+    STUDENT = "student"
     email = StringField(required=True, max_length=255)
     name = StringField(required=True, max_length=255)
-    password = StringField(max_length=255)
-
+    password = StringField(required=True,max_length=255)
+    roles = ListField(required=True)

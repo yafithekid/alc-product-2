@@ -10,10 +10,10 @@ class MongoDatabaseFactoryImpl(MongoDatabaseFactory):
         self.default_host = default_host
 
     def get_db_user(self) -> Database:
-        return MongoClient(self.default_host,27017).get_database("alc-user")
+        return MongoClient(self.default_host, 27017).get_database("alc-user")
 
     def get_db_lc(self) -> Database:
-        return MongoClient(self.default_host,27017).get_database("alc-lc")
+        return MongoClient(self.default_host, 27017).get_database("alc-lc")
 
 
 class MongoSerializationFactoryImpl(MongoSerializationFactory):

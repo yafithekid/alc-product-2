@@ -20,7 +20,7 @@
 {% include 'scripts/mathjax.html' %}
 {% include 'scripts/ckeditor.html' %}
 <script>
-CKEDITOR.replace("content");
+CKEDITOR.replace("question");
 $("#preview-btn").click(function(){
     $("#preview-content").html(CKEDITOR.instances['content'].getData());
     MathJax.Hub.Rerender();

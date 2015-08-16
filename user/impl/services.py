@@ -15,7 +15,7 @@ class UserServiceImpl(UserService):
     def hash_password(self, password: str) -> str:
         h = hashlib.sha256()
         h.update(password.encode("utf-8"))
-        return (h.hexdigest())
+        return h.hexdigest()
 
     def find_by_email(self, email: str) -> User:
         return self.user_dao.find_by_email(email)
@@ -28,5 +28,7 @@ class UserServiceImpl(UserService):
         user.email=email
         user.password=self.hash_password(password)
         user.name=name
+        user.roles = [User.STUDENT]
+
 
         return self.user_dao.insert(user)

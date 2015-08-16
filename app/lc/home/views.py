@@ -3,10 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse
 from . import forms
 from lc.containers import lc_service_container
-from lc.filters import authenticated
+from lc.filters import Authorized
 from lc.problem.api.services import ProblemService
 from user.api.services import UserService
 from user.auth.api.services import AuthService
+from user.collections import User
 from user.containers import user_service_container
 
 
@@ -19,7 +20,7 @@ def register(request):
             user_service = user_service_container.load(UserService.__name__)
             assert (isinstance(user_service, UserService))
             if form.cleaned_data['password'] != form.cleaned_data['confirm_password']:
-                form.add_error("confirm_password","Password doesn't match")
+                form.add_error("confirm_password", "Password doesn't match")
             elif user_service.find_by_email(email=form.cleaned_data['email']) is None:
                 _id = user_service.add_user(email=form.cleaned_data['email'], password=form.cleaned_data['password'],
                                             name=form.cleaned_data['name'])
@@ -78,10 +79,11 @@ def home(request):
     return render(request, 'home/home.html', {})
 
 
-@authenticated
+@Authorized()
 def about(request):
     return render(request, "home/about.html", {})
 
 
+@Authorized(min_role=User.TEACHER)
 def contact(request):
     return render(request, "home/contact.html", {})

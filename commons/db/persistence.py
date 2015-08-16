@@ -1,4 +1,4 @@
-from commons.fields import StringField, Field, ErrorBag
+from commons.fields import Field, ErrorBag
 
 
 class Entity:

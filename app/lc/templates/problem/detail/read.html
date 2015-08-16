@@ -3,10 +3,11 @@
 {% block content %}
 {{ block.super }}
 <div class='well col-md-9'>
-<div class='content-title-user'>Judul Soal</div>
+<div class='content-title-user'>{{problem.title}}</div>
 <div class='content-desc'>
-  When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
-$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+  {% autoescape off %}
+  {{problem.question}}
+  {% endautoescape %}
 </div>
 <form class='form-inline'>
 <div class="input-group">

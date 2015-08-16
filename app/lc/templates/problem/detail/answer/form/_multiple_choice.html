@@ -1,43 +1,45 @@
-<div class="form-group">
-    Answer
-</div>
 <div class="row form-group">
     <div class="col-md-1">
-        <input type="radio" type="text" {% if form.answer == 'A' %} checked {% endif %} /> A
+        <input name='answer' value='A' type="radio" type="text" {% if form.answer == 'A' %} checked {% endif %} /> A
     </div>
     <div class="col-md-11">
-        <input name="choice_a" type="text" class="form-control" value="{{form.choice_a.value}}"/>
-    </div>
-</div>
-<div class="row form-group">
-    <div class="col-md-1">
-        <input type="radio" type="text" {% if form.answer == 'B' %} checked {% endif %} /> B
-    </div>
-    <div class="col-md-11">
-        <input name="choice_b" type="text" class="form-control" value="{{form.choice_b.value}}"/>
+        <input name="content_a" type="text" class="form-control" value="{{form.content_a.value | default_if_none:''}}"/>
+        <span class="error">{{form.content_a.errors}}</span>
     </div>
 </div>
 <div class="row form-group">
     <div class="col-md-1">
-        <input type="radio" type="text" {% if form.answer == 'C' %} checked {% endif %} /> C
+        <input name='answer' value='B' type="radio" type="text" {% if form.answer == 'B' %} checked {% endif %} /> B
     </div>
     <div class="col-md-11">
-        <input name="choice_c" type="text" class="form-control" value="{{form.choice_c.value}}"/>
+        <input name="content_b" type="text" class="form-control" value="{{form.content_b.value | default_if_none:''}}"/>
+        <span class="error">{{form.content_b.errors}}</span>
     </div>
 </div>
 <div class="row form-group">
     <div class="col-md-1">
-        <input type="radio" type="text" {% if form.answer == 'D' %} checked {% endif %} /> D
+        <input name='answer' value='C' type="radio" type="text" {% if form.answer == 'C' %} checked {% endif %} /> C
     </div>
     <div class="col-md-11">
-        <input name="choice_d" type="text" class="form-control" value="{{form.choice_d.value}}"/>
+        <input name="content_c" type="text" class="form-control" value="{{form.content_c.value | default_if_none:''}}"/>
+        <span class="error">{{form.content_c.errors}}</span>
     </div>
 </div>
 <div class="row form-group">
     <div class="col-md-1">
-        <input type="radio" type="text" {% if form.answer == 'E' %} checked {% endif %} /> E
+        <input name='answer' value='D' type="radio" type="text" {% if form.answer == 'D' %} checked {% endif %} /> D
     </div>
     <div class="col-md-11">
-        <input name="choice_e" type="text" class="form-control" value="{{form.choice_e.value}}"/>
+        <input name="content_d" type="text" class="form-control" value="{{form.content_d.value | default_if_none:''}}"/>
+        <span class="error">{{form.content_d.errors}}</span>
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-1">
+        <input name='answer' value='E' type="radio" type="text" {% if form.answer == 'E' %} checked {% endif %} /> E
+    </div>
+    <div class="col-md-11">
+        <input name="content_e" type="text" class="form-control" value="{{form.content_e.value | default_if_none:''}}"/>
+        <span class="error">{{form.content_e.errors}}</span>
     </div>
 </div>

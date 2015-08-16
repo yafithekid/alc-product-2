@@ -15,5 +15,5 @@ class AuthService:
     def is_logged_in(self,_session:session):
         raise NotImplementedError
 
-    def has_role(self,user: User,role_name:str):
+    def is_authorized_for(self,_session:session,min_role: str):
         raise NotImplementedError
