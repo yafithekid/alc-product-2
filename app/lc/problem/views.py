@@ -5,7 +5,9 @@ from django.template import RequestContext, loader
 from .forms import MultipleChoiceProblemForm, ShortAnswerProblemForm
 from lc.collections import Problem
 from lc.containers import lc_service_container
+from lc.filters import Authorized
 from lc.problem.api.services import ProblemService
+from user.collections import User
 
 
 def index(request):
@@ -14,6 +16,7 @@ def index(request):
     return HttpResponse(template.render(context))
 
 
+@Authorized(min_role=User.TEACHER)
 def create(request):
     type = request.GET.get('type', Problem.MULTIPLE_CHOICE)
     if type == Problem.MULTIPLE_CHOICE:

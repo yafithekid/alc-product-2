@@ -15,10 +15,9 @@ class Authorized(object):
             if not auth_service.is_logged_in(request.session):
                 return HttpResponseRedirect(reverse('login') + "?next=" + request.path + "")
             else:
-                if not auth_service.is_authorized_for(request.session,self.min_role):
+                if not (self.min_role is None) and not auth_service.is_authorized_for(request.session, self.min_role):
                     return HttpResponseForbidden()
                 else:
                     return f(request)
 
         return do_filter
-

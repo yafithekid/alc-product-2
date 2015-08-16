@@ -65,6 +65,7 @@ def login(request):
         return HttpResponse("login_success")
 
 
+@Authorized()
 def logout(request):
     auth_service = user_service_container.load(AuthService.__name__)
     assert (isinstance(auth_service, AuthService))
