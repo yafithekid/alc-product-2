@@ -8,5 +8,5 @@ class User(Entity):
     STUDENT = "student"
     email = StringField(required=True, max_length=255)
     name = StringField(required=True, max_length=255)
-    password = StringField(required=True,max_length=255)
+    password = StringField(required=True, max_length=255)
     roles = ListField(required=True)

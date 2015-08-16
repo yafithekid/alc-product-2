@@ -7,7 +7,10 @@ from lc.collections import Problem
 from lc.containers import lc_service_container
 from lc.filters import Authorized
 from lc.problem.api.services import ProblemService
+from user.api.services import UserService
+from user.auth.api.services import AuthService
 from user.collections import User
+from user.containers import user_service_container
 
 
 def index(request):
@@ -30,6 +33,12 @@ def create(request):
                 problem = Problem.from_multiple_choice_form(form)
             else:
                 problem = Problem.from_short_answer_form(form)
+            # get user id
+            auth_service = user_service_container.load(AuthService.__name__)
+            assert isinstance(auth_service,AuthService)
+            user_id = auth_service.get_value("_id",request.session)
+            problem.creator_id = user_id
+
             problem_service = lc_service_container.load(ProblemService.__name__)
             assert isinstance(problem_service, ProblemService)
             problem_id = problem_service.insert(problem)

@@ -15,11 +15,22 @@ class AuthServiceImpl(AuthService):
     def __init__(self, user_service: UserService):
         self.user_service = user_service
 
+    def get_value(self, key, _session):
+        if _session.has_key(self.KEY):
+            _dict = _session[self.KEY]
+            if key in _dict:
+                return _dict[key]
+            else:
+                return None
+        else:
+            return None
+
     def login(self, user: User, _session: session):
         _session[self.KEY] = {
             "email": user.email,
             "name": user.name,
-            "roles": user.roles
+            "roles": user.roles,
+            "_id": str(user._id)
         }
 
     def logout(self, _session: session):
@@ -33,7 +44,7 @@ class AuthServiceImpl(AuthService):
     def is_logged_in(self, _session: session):
         return _session.has_key(self.KEY) and not (_session[self.KEY] is None)
 
-    def is_authorized_for(self,_session: session,min_role: str):
+    def is_authorized_for(self, _session: session, min_role: str):
         if not self.is_logged_in(_session):
             return False
         user_roles = _session[self.KEY]["roles"]

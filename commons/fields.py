@@ -114,22 +114,27 @@ class DocumentField(Field):
         self.required = required
 
     def validate(self, field_name, value):
-        if self.required and (not hasattr(value, field_name) or isinstance(getattr(value, field_name), Field)):
-            value.add_error(field_name, "This field is required")
-        else:
+        if self.required:
+            if isinstance(getattr(value, field_name), Field):
+                value.add_error(field_name, "This field is required")
+            else:
+                field = getattr(value, field_name)
+                if not isinstance(field, self.BaseClass):
+                    value.add_error(field_name, "Not an instance of " + self.BaseClass.__name__)
+        elif not (isinstance(getattr(value, field_name), Field)):
             field = getattr(value, field_name)
             if not isinstance(field, self.BaseClass):
-                value.add_error(field_name, "Not an instance of " + self.BaseClass.__name__)
+                    value.add_error(field_name, "Not an instance of " + self.BaseClass.__name__)
 
 
 class ListField(Field):
-    def __init__(self,required=False):
+    def __init__(self, required=False):
         self.required = required
 
     def validate(self, field_name, value):
         if self.required and isinstance(getattr(value, field_name), Field):
             value.add_error(field_name, "This field is required")
         else:
-            field = getattr(value,field_name)
-            if not isinstance(field,list):
-                value.add_error(field_name,"Not an instance of list")
+            field = getattr(value, field_name)
+            if not isinstance(field, list):
+                value.add_error(field_name, "Not an instance of list")

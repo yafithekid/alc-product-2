@@ -29,6 +29,8 @@ class Problem(Entity):
     answer = StringField(required=True, max_length=255)
     question = StringField()
     choices = DocumentField(BaseClass=ProblemChoice)
+    creator_id = StringField(required=True)
+    type = StringField(required=True, max_length=2)
 
     @classmethod
     def from_form(cls, form: ProblemForm):
@@ -49,3 +51,11 @@ class Problem(Entity):
     def from_short_answer_form(cls, form: ShortAnswerProblemForm):
         problem = cls.from_form(form)
         return problem
+
+
+class Material(Entity):
+    title = StringField(required=True, max_length=255)
+    content = StringField(required=True)
+    creator_id = ObjectIdField(required=True)
+
+    pass
