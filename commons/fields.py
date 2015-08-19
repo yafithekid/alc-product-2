@@ -90,15 +90,6 @@ class NumberField(Field):
                 value.add_error(field_name, "Maximum value exceeded")
 
 
-class ListField(Field):
-    def __init__(self, required=False):
-        self.required = required
-
-    def validate(self, field_name, value):
-        if self.required and (not hasattr(value, field_name) or isinstance(getattr(value, field_name), Field)):
-            value.add_error(field_name, "This field is required")
-
-
 class ObjectIdField(Field):
     def __init__(self, required=False):
         self.required = required
@@ -124,7 +115,7 @@ class DocumentField(Field):
         elif not (isinstance(getattr(value, field_name), Field)):
             field = getattr(value, field_name)
             if not isinstance(field, self.BaseClass):
-                    value.add_error(field_name, "Not an instance of " + self.BaseClass.__name__)
+                value.add_error(field_name, "Not an instance of " + self.BaseClass.__name__)
 
 
 class ListField(Field):
@@ -138,3 +129,18 @@ class ListField(Field):
             field = getattr(value, field_name)
             if not isinstance(field, list):
                 value.add_error(field_name, "Not an instance of list")
+
+
+class ChoiceField(Field):
+    def __init__(self, choices: list, required=False):
+        self.choices = choices
+        self.required = required
+
+    def validate(self, field_name, value):
+        if self.required and isinstance(getattr(value, field_name), Field):
+            value.add_error(field_name, "This field is required")
+        else:
+            assert isinstance(self.choices, list)
+            field = getattr(value, field_name)
+            if not (field in self.choices):
+                value.add_error(field_name, "Value not in list")

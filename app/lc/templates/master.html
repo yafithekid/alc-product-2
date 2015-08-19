@@ -34,6 +34,9 @@
               <a href="{% url 'tryout.create' %}">Tryout Baru</a>
           </li>
           <li>
+              <a href="{% url 'course.create' %}">Course Baru</a>
+          </li>
+          <li>
               {% if request.session.auth_user == None %}
               <a href="{% url 'login' %}">Login</a>
               {% else %}

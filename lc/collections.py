@@ -1,6 +1,7 @@
+from app.lc.course.forms import CourseForm
 from app.lc.problem.forms import ProblemForm, MultipleChoiceProblemForm, ShortAnswerProblemForm
 from commons.db.persistence import Entity
-from commons.fields import ObjectIdField, StringField, DocumentField
+from commons.fields import ObjectIdField, StringField, DocumentField, ChoiceField
 
 
 class ProblemChoice(Entity):
@@ -53,9 +54,33 @@ class Problem(Entity):
         return problem
 
 
+class Course(Entity):
+    PUBLIC = "public"
+    PRIVATE = "private"
+
+    title = StringField(required=True, max_length=255)
+    description = StringField(required=True)
+    creator_id = ObjectIdField(required=True)
+    type = ChoiceField(required=True, choices=[PUBLIC, PRIVATE])
+
+    @classmethod
+    def from_form(cls, form: CourseForm):
+        course = cls()
+        course.title = form.cleaned_data['title']
+        course.description = form.cleaned_data['description']
+        course.type = form.cleaned_data['type']
+        return course
+
+    @classmethod
+    def to_form(cls, course):
+        return CourseForm({
+            "title": course.title,
+            "description": course.description,
+            "type": course.type
+        })
+
+
 class Material(Entity):
     title = StringField(required=True, max_length=255)
     content = StringField(required=True)
     creator_id = ObjectIdField(required=True)
-
-    pass

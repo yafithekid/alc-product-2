@@ -1,0 +1,26 @@
+{% if url == "course.update" %}
+<form action="{% url 'course.update' id %}" method="post">
+{% else %}
+<form action='{% url url %}' method='post'>
+{% endif %}
+    {% csrf_token %}
+    <span class="error">{{form.non_field_errors}}</span>
+    <div class='form-group'>
+        <label>Judul</label>
+        <input name='title' type='text' class='form-control' placeholder='Judul' id='title' value="{{form.title.value | default_if_none:''}}"/>
+        <span class="error">{{form.title.errors}}</span>
+    </div>
+    <div class='form-group'>
+        <label>Deskripsi</label>
+        <textarea name='description' class='form-control'>{{form.description.value | default_if_none:''}}</textarea>
+        <span class="error">{{form.description.errors}}</span>
+    </div>
+    <div class="form-group">
+        <input name="type" name="radio" value="{{public_course}}" type="radio" {% if form.type.value == public_course %} checked{% endif%}/> Terbuka
+        <input name="type" name="radio" value="{{private_course}}" type="radio" {% if form.type.value == private_course %} checked{% endif%}/> Tertutup<br/>
+        <span class="error">{{form.type.errors}}</span>
+    </div>
+    <div class='form-group'>
+    <input type='submit' value='Save' class='btn btn-primary'/>
+    </div>
+</form>

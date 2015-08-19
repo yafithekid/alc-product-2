@@ -9,7 +9,7 @@ class Authorized(object):
         self.min_role = min_role
 
     def __call__(self, f):
-        def do_filter(request):
+        def do_filter(request, **kwargs):
             auth_service = user_service_container.load(AuthService.__name__)
             assert (isinstance(auth_service, AuthService))
             if not auth_service.is_logged_in(request.session):
@@ -18,6 +18,6 @@ class Authorized(object):
                 if not (self.min_role is None) and not auth_service.is_authorized_for(request.session, self.min_role):
                     return HttpResponseForbidden()
                 else:
-                    return f(request)
+                    return f(request, **kwargs)
 
         return do_filter

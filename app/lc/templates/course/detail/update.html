@@ -1,0 +1,9 @@
+{% extends 'master-sidebar.html' %}
+{% block content %}
+{{ block.super }}
+<div class="col-md-9">
+    <div class="well">
+        {% include "course/detail/_form.html" with form=form url="course.update" id=id %}
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,14 @@
 {% extends 'master-sidebar.html' %}
 {% block content %}
 {{block.super}}
-this is course.info file s
+<div class="col-md-9">
+    <div class="well">
+        <div class="content-title-user">
+            {{course.title}}
+        </div>
+        <div class="content-desc">
+            {{course.description}}
+        </div>
+    </div>
+</div>
 {% endblock %}
