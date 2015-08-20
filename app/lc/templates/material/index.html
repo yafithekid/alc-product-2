@@ -7,6 +7,16 @@
         <div class="col-md-4 col-md-offset-8">
             {% include "material/_search.html" %}
         </div>
+
+        {% for model in res.models %}
+            <div class="row">
+            {{model}}
+            </div>
+        {% endfor %}
+
+        {% autoescape off %}
+        {{res.render_pagination}}
+        {% endautoescape %}
         </div>
     </div>
     {% include "material/_card.html" with title="Judul Materi" %}

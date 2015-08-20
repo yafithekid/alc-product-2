@@ -32,7 +32,9 @@ def update(request):
 
 
 def index(request):
-    return render(request, get_template("index.html"), {})
+    material_service = get_material_service()
+    res = material_service.paginate({}, {}, 3, request)
+    return render(request, get_template("index.html"), {"res": res})
 
 
 def read(request, _id):
