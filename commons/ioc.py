@@ -29,7 +29,7 @@ class Container:
 
 class ServiceNotFoundException(Exception):
     def __init__(self, interface_name):
-        super().__init__("Interface " + interface_name + " not found")
+        super().__init__("Interface " + interface_name + " not found. Have you already register it with provider?")
 
 
 class ServiceAlreadyExistException(Exception):

@@ -5,7 +5,7 @@
     <div class="content-title-admin">Buat Materi Baru</div>
     <div class="content-desc">
         <form action="{% url 'material.create' %}" method="post">
-        {% include "material/_form.html" with button_value='Buat' %}
+        {% include "material/detail/_form.html" with button_value='Buat' %}
         </form>
     </div>
 </div>

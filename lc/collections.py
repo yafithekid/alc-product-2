@@ -1,4 +1,5 @@
 from app.lc.course.forms import CourseForm
+from app.lc.material.forms import MaterialForm
 from app.lc.problem.forms import ProblemForm, MultipleChoiceProblemForm, ShortAnswerProblemForm
 from commons.db.persistence import Entity
 from commons.fields import ObjectIdField, StringField, DocumentField, ChoiceField
@@ -84,3 +85,10 @@ class Material(Entity):
     title = StringField(required=True, max_length=255)
     content = StringField(required=True)
     creator_id = ObjectIdField(required=True)
+
+    @classmethod
+    def from_form(cls, form: MaterialForm):
+        material = cls()
+        material.title = form.cleaned_data['title']
+        material.content = form.cleaned_data['content']
+        return material

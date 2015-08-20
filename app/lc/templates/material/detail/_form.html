@@ -1,0 +1,14 @@
+{% csrf_token %}
+<div class='form-group'>
+    <label>Judul</label>
+    <input name="title" type='text' class='form-control' placeholder='Judul' value="{{form.title.value|default_if_none:''}}"/>
+    <span class="error">{{form.title.errors}}</span>
+</div>
+<div class="form-group">
+    <label>Konten</label>
+    <textarea name="content" class="form-control">{{form.content.value|default_if_none:''}}</textarea>
+    <span class="error">{{form.content.errors}}</span>
+</div>
+<div class='form-group'>
+    <button type='submit' class='btn btn-primary'>{{button_value}}</button>
+</div>

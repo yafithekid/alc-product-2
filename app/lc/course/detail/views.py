@@ -30,7 +30,8 @@ def update(request, _id):
     if course is None:
         return HttpResponseNotFound()
     form = Course.to_form(course)
-    return render(request, "course/detail/update.html", {"form": form, "id": _id,"public_course":Course.PUBLIC,"private_course":Course.PRIVATE})
+    return render(request, "course/detail/update.html",
+                  {"form": form, "id": _id, "public_course": Course.PUBLIC, "private_course": Course.PRIVATE})
 
 
 def join(request, _id):
