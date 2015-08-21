@@ -11,6 +11,8 @@ class MongoSerializationImpl(MongoSerialization):
         else:
             for key, value in objek.items():
                 setattr(entity, key, value)
+        #TODO hack
+        entity.id = str(objek["_id"])
         return entity
 
     def to_mongo(self, objek: Entity, clazz) -> dict:
@@ -29,5 +31,4 @@ class MongoSerializationImpl(MongoSerialization):
                     ret[field_name] = self.to_mongo(field, class_field.BaseClass)
             else:
                 ret[field_name] = None
-        print(ret)
         return ret

@@ -27,18 +27,10 @@ def create(request):
     return render(request, get_template("create.html"), {"form": form})
 
 
-def update(request):
-    return render(request, get_template("update.html"), {})
-
-
 def index(request):
     material_service = get_material_service()
-    res = material_service.paginate({}, {}, 3, request)
+    res = material_service.paginate({}, [], 1, request)
     return render(request, get_template("index.html"), {"res": res})
-
-
-def read(request, _id):
-    return render(request, get_template("read.html"), {})
 
 
 def get_template(file_name):

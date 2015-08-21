@@ -33,17 +33,17 @@ class ResultWithPagination:
 
 class DaoWithPagination:
     def find(self, query: dict, sort: dict, limit: int, skip: int):
-        ret = []
-        for i in range(skip, skip + limit):
-            ret.append(i)
-        # TODO impl
-        return ret
+        raise NotImplementedError
+        # ret = []
+        # for i in range(skip, skip + limit):
+        #     ret.append(i)
+        # return ret
 
     def count(self, query: dict):
-        # TODO impl
-        return 10
+        raise NotImplementedError
+        # return 10
 
-    def paginate(self, query: dict, sort: dict, limit: int, request: HttpRequest):
+    def paginate(self, query: dict, sort: list, limit: int, request: HttpRequest):
         # current page is start from one
         current_page = (request.GET.get("page", 1))
         try:
@@ -56,4 +56,5 @@ class DaoWithPagination:
         total_page = int(ceil(count / limit))
         skip = current_page * limit
         models = self.find(query, sort, limit, skip)
+        print(models)
         return ResultWithPagination(models=models, current_page=current_page, total_page=total_page, request=request)

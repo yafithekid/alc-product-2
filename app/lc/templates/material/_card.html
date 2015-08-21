@@ -1,6 +1,6 @@
 {% extends "commons/_card.html" %}
 {% block card_header %}
-<a href="{% url 'material.read' 123 %}">{{title}}</a>
+<a href="{% url 'material.read' model.id %}">{{model.title}}</a>
 {% endblock %}
 {% block card_content %}
 {% endblock %}

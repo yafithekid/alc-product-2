@@ -6,7 +6,7 @@ from lc.material.api.services import MaterialService
 
 
 class MaterialServiceImpl(MaterialService):
-    def paginate(self, query: dict, sort: dict, limit: int, request: HttpRequest) -> ResultWithPagination:
+    def paginate(self, query: dict, sort: list, limit: int, request: HttpRequest) -> ResultWithPagination:
         return self.material_dao.paginate(query, sort, limit, request)
 
     def __init__(self,
