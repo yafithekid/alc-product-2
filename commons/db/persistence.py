@@ -9,14 +9,12 @@ class Entity:
     def validate(self, field_name=None):
         if field_name is None:
             field_names = self.__class__.get_field_names()
-            print(field_names)
             for field_name in field_names:
                 self.validate(field_name)
         else:
             if hasattr(self.__class__, field_name):
                 field = getattr(self.__class__, field_name)
                 if isinstance(field, Field):
-                    print(field_name)
                     field.validate(field_name, self)
 
     def field_exist(self, name: str) -> bool:

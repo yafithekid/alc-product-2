@@ -45,18 +45,17 @@ class MaterialDaoImpl(MaterialDao):
         return self.db.get_collection(self.MATERIAL_COLLECTION_NAME)
 
     def find(self, query: dict, sort: dict, limit: int, skip: int):
-        print("here")
-        retval = []
         coll = self.get_collection()
         try:
+            retval = []
             db_results = coll.find(filter=query, sort=sort, limit=limit, skip=skip)
             for db_object in db_results:
                 retval.append(self.mongo_serialization.to_entity(db_object, Material))
             return retval
         # TODO more specific exception
         except Exception as e:
-            print(e)
             self.logger.error(e.args)
+            return None
 
     def count(self, query: dict):
         coll = self.get_collection()

@@ -15,11 +15,9 @@ from user.containers import user_service_container
 
 
 def index(request):
-    return render(request, "course/index.html", {})
-
-
-def read(request, _id):
-    return render(request, "course/read.html", {})
+    course_service = get_course_service()
+    res = course_service.paginate({}, [], 1, request)
+    return render(request, "course/index.html", {"res": res})
 
 
 @Authorized(min_role=User.TEACHER)
@@ -29,12 +27,10 @@ def create(request):
         form = CourseForm(request.POST)
         if form.is_valid():
             course = Course.from_form(form)
-            auth_service = user_service_container.load(AuthService.__name__)
-            assert isinstance(auth_service, AuthService)
+            auth_service = get_auth_service()
             user_id = auth_service.get_value("_id", request.session)
             course.creator_id = user_id
-            course_service = lc_service_container.load(CourseService.__name__)
-            assert isinstance(course_service, CourseService)
+            course_service = get_course_service()
             course_id = course_service.add_course(course)
             if not (course_id is None):
                 return HttpResponseRedirect(reverse("course.info", args=[course_id]))
@@ -43,5 +39,13 @@ def create(request):
                   {"form": form, "public_course": Course.PUBLIC, "private_course": Course.PRIVATE})
 
 
-def join(request):
-    pass
+def get_auth_service():
+    auth_service = user_service_container.load(AuthService.__name__)
+    assert isinstance(auth_service, AuthService)
+    return auth_service
+
+
+def get_course_service():
+    course_service = lc_service_container.load(CourseService.__name__)
+    assert isinstance(course_service, CourseService)
+    return course_service

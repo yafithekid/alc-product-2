@@ -2,6 +2,7 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from lc.containers import lc_service_container
 from lc.material.api.services import MaterialService
+from lc.material.filters import AuthorizedForMaterialView
 
 
 def update(request, _id):

@@ -33,7 +33,6 @@ class UserDaoImpl(UserDao):
     def find(self, _filters: dict):
         try:
             result = self.coll.find_one(_filters)
-            print(_filters)
             return self.mongo_serialization.to_entity(result, User)
         except Exception as e:
             self.logger.error(e)

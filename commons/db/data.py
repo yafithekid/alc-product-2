@@ -1,5 +1,4 @@
-from django.core.urlresolvers import reverse
-from django.http import HttpRequest, QueryDict
+from django.http import HttpRequest
 from math import ceil
 
 
@@ -24,7 +23,6 @@ class ResultWithPagination:
             except KeyError:
                 pass
             next_get.update({"page": i + 1})
-            print(str(next_get.urlencode()))
             ret += "<li><a href='" + next_request.get_full_path() + "?" + next_get.urlencode() + "'>" + str(
                 i + 1) + "</a>"
         ret += "</ul>"
@@ -32,7 +30,7 @@ class ResultWithPagination:
 
 
 class DaoWithPagination:
-    def find(self, query: dict, sort: dict, limit: int, skip: int):
+    def find(self, query: dict, sort: list, limit: int, skip: int):
         raise NotImplementedError
         # ret = []
         # for i in range(skip, skip + limit):
@@ -56,5 +54,4 @@ class DaoWithPagination:
         total_page = int(ceil(count / limit))
         skip = current_page * limit
         models = self.find(query, sort, limit, skip)
-        print(models)
         return ResultWithPagination(models=models, current_page=current_page, total_page=total_page, request=request)

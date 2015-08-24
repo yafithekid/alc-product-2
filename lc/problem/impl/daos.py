@@ -10,11 +10,28 @@ class ProblemDaoImpl(ProblemDao):
     COLLECTION_NAME = "problem"
     logger = logging.getLogger("lc")
 
+    def find(self, query: dict, sort: list, limit: int, skip: int):
+        try:
+            ret = []
+            coll = self.get_collection()
+            db_cursor = coll.find(filter=query, sort=sort, limit=limit, skip=skip)
+            for db_object in db_cursor:
+                ret.append(self.mongo_serialization.to_entity(db_object, Problem))
+            return ret
+        # TODO more generic exception
+        except Exception as e:
+            self.logger.error(e)
+            return None
+
+    def count(self, query: dict):
+        coll = self.get_collection()
+        return coll.count(filter=query)
+
     def find_by_id(self, _id: str) -> Problem:
         try:
             coll = self.get_collection()
             db_object = coll.find_one({"_id": ObjectId(_id)})
-            problem =  self.mongo_serialization.to_entity(db_object, Problem)
+            problem = self.mongo_serialization.to_entity(db_object, Problem)
             return problem
         except Exception as e:
             self.logger.error(e)

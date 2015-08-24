@@ -16,6 +16,20 @@ class CourseDaoImpl(CourseDao):
         self.mongo_serialization = mongo_serialization_factory.get_instance()
         self.db = db
 
+    def count(self, query: dict):
+        coll = self.get_collection()
+        return coll.count(query)
+
+    def find(self, query: dict, sort: list, limit: int, skip: int):
+        coll = self.get_collection()
+        db_cursor = coll.find(filter=query, sort=sort, limit=limit, skip=skip)
+        ret = []
+        for db_object in db_cursor:
+            ret.append(self.mongo_serialization.to_entity(db_object, Course))
+        print("ret")
+        print(ret)
+        return ret
+
     def find_by_id(self, _id: str) -> Course:
         coll = self.get_collection()
         try:
@@ -37,4 +51,3 @@ class CourseDaoImpl(CourseDao):
         # TODO should change to mongo exception
         except Exception as e:
             return None
-

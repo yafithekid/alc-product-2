@@ -9,6 +9,11 @@
             </div>
         </div>
     </div>
-    {% include "course/_card.html" with title="Judul Course" %}
+    {% for model in res.models %}
+        {% include "course/detail/_card.html" with model=model %}
+    {% endfor %}
+    {% autoescape off %}
+        {{res.render_pagination}}
+    {% endautoescape %}
 </div>
 {% endblock %}
