@@ -2,7 +2,7 @@ from app.lc.course.forms import CourseForm
 from app.lc.material.forms import MaterialForm
 from app.lc.problem.forms import ProblemForm, MultipleChoiceProblemForm, ShortAnswerProblemForm
 from commons.db.persistence import Entity
-from commons.fields import ObjectIdField, StringField, DocumentField, ChoiceField
+from commons.fields import ObjectIdField, StringField, DocumentField, ChoiceField, ListField
 
 
 class ProblemChoice(Entity):
@@ -92,3 +92,10 @@ class Material(Entity):
         material.title = form.cleaned_data['title']
         material.content = form.cleaned_data['content']
         return material
+
+
+class Quiz(Entity):
+    title = StringField(required=True,max_length=255)
+    description = StringField()
+    creator_id = ObjectIdField(required=True)
+    problem_ids = ListField()

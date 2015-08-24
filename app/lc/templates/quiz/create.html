@@ -3,11 +3,11 @@
 {{ block.super }}
 <div class='well col-md-9'>
     <div class="content-title-admin">
-        Buat Tryout
+        Buat Kuis
     </div>
     <div class="content-desc">
-        <form action="{% url 'tryout.create' %}" method="post">
-        {% include "tryout/_form.html" with button_name='Buat'%}
+        <form action="{% url 'quiz.create' %}" method="post">
+        {% include "quiz/detail/_form.html" with button_name='Buat'%}
         </form>
     </div>
 </div>
