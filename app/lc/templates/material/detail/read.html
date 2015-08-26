@@ -6,6 +6,11 @@
         {{material.title}}
     </div>
     <div class="content-desc">
+        {% if can_edit %}
+        <div class="row">
+            <a href='{% url "material.update" id %}'>Ubah materi ini</a>
+        </div>
+        {% endif %}
         <div class="material-download">
             <a href="#" class="btn btn-primary">Download sebagai PDF</a>
         </div>

@@ -10,6 +10,12 @@ class MaterialDaoImpl(MaterialDao):
     MATERIAL_COLLECTION_NAME = "material"
     logger = logging.getLogger("lc")
 
+    def update(self, material: Material) -> str:
+        coll = self.get_collection()
+        write_result = coll.update_one({"_id": material._id},
+                                       {"$set": self.mongo_serialization.to_mongo(material, Material)})
+        return write_result.upserted_id
+
     def __init__(self,
                  mongo_serialization_factory: MongoSerializationFactory,
                  db: Database

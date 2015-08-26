@@ -93,6 +93,14 @@ class Material(Entity):
         material.content = form.cleaned_data['content']
         return material
 
+    @classmethod
+    def to_form(cls,material):
+        return MaterialForm({
+            "title" : material.title,
+            "content" : material.content
+        })
+
+
 
 class Quiz(Entity):
     title = StringField(required=True,max_length=255)

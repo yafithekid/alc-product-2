@@ -27,6 +27,7 @@ def create(request):
     return render(request, get_template("create.html"), {"form": form})
 
 
+@Authorized(min_role=User.TEACHER)
 def index(request):
     material_service = get_material_service()
     res = material_service.paginate({}, [], 1, request)

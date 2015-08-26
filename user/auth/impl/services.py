@@ -18,7 +18,9 @@ class AuthServiceImpl(AuthService):
     def get_value(self, key, _session):
         if _session.has_key(self.KEY):
             _dict = _session[self.KEY]
-            if key in _dict:
+            if _dict is None:
+                return None
+            elif key in _dict:
                 return _dict[key]
             else:
                 return None

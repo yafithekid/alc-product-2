@@ -40,3 +40,4 @@ class UserServiceImpl(UserService):
         self.add_user("s@s.com", "s", "Dummy Student", [User.STUDENT])
         self.add_user("t@t.com", "t", "Dummy Teacher", [User.TEACHER])
         self.add_user("a@a.com", "a", "Dummy Admin", [User.ADMIN])
+        self.add_user("t2@t2.com", "t", "Dummy Teacher 2", [User.TEACHER])

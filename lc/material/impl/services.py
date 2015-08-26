@@ -3,9 +3,20 @@ from commons.db.data import ResultWithPagination
 from lc.collections import Material
 from lc.material.api.daos import MaterialDao
 from lc.material.api.services import MaterialService
+from user.collections import User
 
 
 class MaterialServiceImpl(MaterialService):
+    def edit_material(self, material: Material):
+        return self.material_dao.update(material)
+
+    def can_write_material(self, user_id: User, material: Material):
+        return material.creator_id == user_id
+
+    def can_read_material(self, user_id: User, material: Material):
+        # TODO impl
+        return True
+
     def paginate(self, query: dict, sort: list, limit: int, request: HttpRequest) -> ResultWithPagination:
         return self.material_dao.paginate(query, sort, limit, request)
 

@@ -14,3 +14,6 @@ class MaterialDao(DaoWithPagination):
 
     def insert(self, material: Material) -> str:
         raise NotImplementedError
+
+    def update(self,material:Material) -> str:
+        raise NotImplementedError
